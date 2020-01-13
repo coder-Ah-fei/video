@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<title>一心一忆影视</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/contactstyle.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/faqstyle.css" type="text/css" media="all" />
+	<link href="css/single.css" rel='stylesheet' type='text/css' />
+	<link href="css/medile.css" rel='stylesheet' type='text/css' />
+	<link href="css/jquery.slidey.min.css" rel="stylesheet">
+	<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+	<link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
+</head>
+
+<body>
+<div id="app1">
+	<template>
+		<div class="header">
+			<div class="container">
+				<div class="w3layouts_logo">
+					<a href="index.html"><h1>一心一忆<span>Movies</span></h1></a>
+				</div>
+				<div class="w3_search">
+					<form action="#" method="post">
+						<input type="text" name="Search" placeholder="搜索" required="">
+						<input type="submit" value="Go">
+					</form>
+				</div>
+				<div class="w3l_sign_in_register">
+					<ul>
+						<li><i class="fa fa-phone" aria-hidden="true"></i>010-69515720</li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						Sign In & Sign Up
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<section>
+						<div class="modal-body">
+							<div class="w3_login_module">
+								<div class="module form-module">
+									<div class="toggle"><i class="fa fa-times fa-pencil"></i>
+										<div class="tooltip">Click Me</div>
+									</div>
+									<div class="form">
+										<h3>Login to your account</h3>
+										<form action="#" method="post">
+											<input type="text" name="Username" placeholder="Username" required="">
+											<input type="password" name="Password" placeholder="Password" required="">
+											<input type="submit" value="Login">
+										</form>
+									</div>
+									<div class="form">
+										<h3>Create an account</h3>
+										<form action="#" method="post">
+											<input type="text" name="Username" placeholder="Username" required="">
+											<input type="password" name="Password" placeholder="Password" required="">
+											<input type="email" name="Email" placeholder="Email Address" required="">
+											<input type="text" name="Phone" placeholder="Phone Number" required="">
+											<input type="submit" value="Register">
+										</form>
+									</div>
+									<div class="cta"><a href="#">Forgot your password?</a></div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+		<div class="movies_nav">
+			<div class="container">
+				<nav class="navbar navbar-default">
+					<div class="navbar-header navbar-left">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+						<nav>
+							<ul class="nav navbar-nav">
+								<li v-for="(title, i) in titleList" :class="i == 0 ? 'active': ''"><a :href="title.href">{{title.text}}</a></li>
+							</ul>
+						</nav>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div id="slidey" style="display:none;">
+			<ul>
+				<li v-for="banner in bannerDataList"><img :src="banner.src" alt=" "><p class='title' :data-id="banner.title">{{banner.title}}<input type="hidden" :value="banner.name"></p><p class='description'>{{banner.description}}</p></li>
+			</ul>
+		</div>
+		<div class="banner-bottom">
+			<div class="container">
+				<div class="w3_agile_banner_bottom_grid">
+					<div id="owl-demo" class="owl-carousel owl-theme">
+						<div v-for="owl in owlDataList" class="item">
+							<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+								<a :href="owl.href" class="hvr-shutter-out-horizontal"><img style="height: 38vh;" :src="owl.src" title="album-name" class="img-responsive" alt=" " />
+									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+								</a>
+								<div class="mid-1 agileits_w3layouts_mid_1_home">
+									<div class="w3l-movie-text">
+										<h6><a :href="owl.href">{{owl.movieName}}</a></h6>
+									</div>
+									<div class="mid-2 agile_mid_2_home">
+										<p>{{owl.year}}</p>
+										<div class="block-stars">
+											<ul class="w3l-ratings">
+												<li v-for="i in 5"><a href="#"><i :class="owl.start == i ? 'fa fa-star' : 'fa fa-star-o'" aria-hidden="true"></i></a></li>
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="ribben">
+									<p>{{owl.mark}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="general">
+			<h4 class="latest-text w3_latest_text">精选电影</h4>
+			<div class="container">
+				<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+					<ul id="myTab" class="nav nav-tabs" role="tablist">
+						<li v-for="(classMovies, i) in classMoviesList" role="presentation" :class="i == 0 ? 'active': ''"><a :href="'#' + classMovies.title" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">{{classMovies.title}}</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div v-for="(classMovies, i) in classMoviesList" role="tabpanel" :class="'tab-pane fade ' + (i == 0 ? 'active in' : '')" :id="classMovies.title" :aria-labelledby="classMovies.title + '-tab'">
+							<div class="w3_agile_featured_movies">
+								<div v-for="data in classMovies.list" class="col-md-2 w3l-movie-gride-agile">
+									<a :href="'video-detail.html?tvDetailId=' + data.id" class="hvr-shutter-out-horizontal"><img style="height: 35vh;" :src="!!data.tvPhotoDtoList ? data.tvPhotoDtoList[0].resourcePath : ''" title="album-name" class="img-responsive" alt=" " />
+										<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+									</a>
+									<div class="mid-1 agileits_w3layouts_mid_1_home">
+										<div class="w3l-movie-text">
+											<h6><a :href="'video-detail.html?tvDetailId=' + data.id">{{data.movieNmae}}</a></h6>
+										</div>
+										<div class="mid-2 agile_mid_2_home">
+											<p>{{data.releaseDate}}</p>
+											<div class="block-stars">
+												<ul class="w3l-ratings">
+													<li v-for="j in 5"><a href="#"><i :class="data.level == j ? 'fa fa-star' : 'fa fa-star-o'" aria-hidden="true"></i></a></li>
+												</ul>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+									<div class="ribben">
+<!--										<p>{{data.mark}}</p>-->
+										<p>精选</p>
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="Latest-tv-series">
+			<h4 class="latest-text w3_latest_text w3_home_popular">最流行的电影</h4>
+			<div class="container">
+				<section class="slider">
+					<div class="flexslider">
+						<ul class="slides">
+							<li v-for="(mostData, i) in mostDataList">
+								<div class="agile_tv_series_grid">
+									<div class="col-md-6 agile_tv_series_grid_left">
+										<div class="w3ls_market_video_grid1">
+											<img style="max-height: 55vh;" :src="mostData.src" alt=" " class="img-responsive" />
+											<a class="w3_play_icon" :href="mostData.href">
+												<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+											</a>
+										</div>
+									</div>
+									<div style="height: 55vh;" class="col-md-6 agile_tv_series_grid_right">
+										<p class="fexi_header">{{mostData.moviesName}}</p>
+										<p class="fexi_header_para"><span class="conjuring_w3">简介<label>:</label></span>{{mostData.storyLine}}</p>
+										<p class="fexi_header_para"><span>上映时间<label>:</label></span> {{mostData.year}}  </p>
+										<p class="fexi_header_para">
+											<span>类型<label>:</label> </span>
+											<a v-for="(data, i) in mostData.genres" href="genres.html">[{{data}}]</a> <!--<template v-if="i != (mostData.genres.length)">|</template>-->
+										</p>
+										<p class="fexi_header_para fexi_header_para1"><span>评分<label>:</label></span>
+											<a v-for="j in 5" href="#"><i :class="'fa ' + (mostData.star == j ? 'fa-star-o' : 'fa-star')" aria-hidden="true"></i></a>
+										</p>
+									</div>
+									<div class="clearfix"> </div>
+									<div class="agileinfo_flexislider_grids">
+										<div v-for="data in mostData.list" class="col-md-2 w3l-movie-gride-agile">
+											<a :href="data.href" class="hvr-shutter-out-horizontal"><img style="height: 35vh;" :src="data.src" title="album-name" class="img-responsive" alt=" " />
+												<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+											</a>
+											<div class="mid-1 agileits_w3layouts_mid_1_home">
+												<div class="w3l-movie-text">
+													<h6><a :href="data.href">{{data.moviesName}}</a></h6>
+												</div>
+												<div class="mid-2 agile_mid_2_home">
+													<p>{{data.year}}</p>
+													<div class="block-stars">
+														<ul class="w3l-ratings">
+															<li v-for="j in 5"><a href="#"><i :class="'fa ' + (data.star == j ? 'fa-star-o' : 'fa-star')" aria-hidden="true"></i></a></li>
+														</ul>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+											</div>
+											<div class="ribben">
+												<p>{{data.mark}}</p>
+											</div>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+			</div>
+		</div>
+<!--		<div  v-for="(mostData, i) in mostDataList" :id="'small-dialog' + i" class="mfp-hide">-->
+<!--			<div style="    text-align: center;">-->
+<!--				<video :poster="mostData.src" controls style="max-width: 700px;" :src="mostData.moviesSrc" />-->
+<!--			</div>-->
+<!--		</div>-->
+		<div class="footer">
+			<div class="container">
+				<div class="w3ls_footer_grid">
+					<div class="col-md-6 w3ls_footer_grid_left">
+						<div class="w3ls_footer_grid_left1">
+							<h2>订阅</h2>
+							<div class="w3ls_footer_grid_left1_pos">
+								<form action="#" method="post">
+									<input type="email" name="email" placeholder="你的邮箱..." required="">
+									<input type="submit" value="发送">
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 w3ls_footer_grid_right">
+						<a href="index.html"><h2>一心一忆<span>Movies</span></h2></a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="col-md-5 w3ls_footer_grid1_left">
+					<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+				</div>
+				<div class="col-md-7 w3ls_footer_grid1_right">
+					<ul>
+						<li>
+							<a href="genres.html">Movies</a>
+						</li>
+						<li>
+							<a href="faq.html">FAQ</a>
+						</li>
+						<li>
+							<a href="horror.html">Action</a>
+						</li>
+						<li>
+							<a href="genres.html">Adventure</a>
+						</li>
+						<li>
+							<a href="comedy.html">Comedy</a>
+						</li>
+						<li>
+							<a href="icons.html">Icons</a>
+						</li>
+						<li>
+							<a href="contact.html">Contact Us</a>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</template>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="https://cn.vuejs.org/js/vue.js"></script>
+<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+<script src="js/jquery.slidey.js"></script>
+<script src="js/jquery.dotdotdot.min.js"></script>
+<script src="js/owl.carousel.js"></script>
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script defer src="js/jquery.flexslider.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	var app1 = new Vue({
+		el:'#app1',
+		data: {
+			titleList: [],
+			bannerDataList: [
+				{name: 'reckoning', src: 'images/reckoning.jpg', title: '了断', description: '当联盟士兵与萨鲁法尔大王的反抗军一同对抗女妖之王时，战争在奥格瑞玛的大门前走向最后的高潮。'},
+				{name: 'safe-haven', src: 'images/safe-haven.jpg', title: '避风港', description: '瓦罗克·萨鲁法尔意识到，要想捍卫部落的未来，就必须去寻找部落曾经的领袖。'},
+				{name: 'terror-of-darkshore', src: 'images/terror-of-darkshore.jpg', title: '黑海岸', description: '唯一的巨魔生还者向纳萨诺斯·凋零者讲述了一个可怕的故事：他的物资运输队伍被难以言喻的自然之力袭击了。'},
+				{name: 'old-soldier', src: 'images/old-soldier.jpg', title: '老兵', description: '战争的怒火席卷了整个艾泽拉斯，但部落的传奇战士瓦罗克·萨鲁法尔却并不想加入战斗。在经历了一辈子的戎马生涯后，他所有亲近的人都已在战火中逝去，甚至包括他的爱子。在这场足以决定部落命运的战争的前夜，这名老兵必须做出选择：是否要永远放下他手中的战斧。'},
+				{name: 'lost-honor', src: 'images/lost-honor.jpg', title: '“失落的荣耀”', description: '在洛丹伦一役之后，萨鲁法尔大王被俘并被关进了暴风城监狱。安度因·乌瑞恩前去探视这位老将，希望摸清部落的阴谋。'},
+				{name: 'warbringers-azshara', src: 'images/warbringers-azshara.jpg', title: '战争使者：艾萨拉', description: '一万年前，大分裂使艾泽拉斯的土地分崩离析。大陆裂开，海水涌入，上层精灵以及他们的女王艾萨拉都无法逃离葬身海底的命运。可是，她在深渊之中，发现的并不是湮灭……而是机遇。'},
+				{name: 'warbringers-sylvanas', src: 'images/warbringers-sylvanas.jpg', title: '战争使者：希尔瓦娜斯', description: '部落大酋长希尔瓦娜斯率军战胜了达纳苏斯的暗夜精灵，然后继续推进，想要征服他们的家园：世界之树泰达希尔。但她遇见了一名濒死的年轻游侠，这名游侠质疑着她的动机，还告诉她，她是无法赢得这场战争的，因为这场战争的本质是对生命宣战。这导致希尔瓦娜斯做出了一个决定，这个决定会改变整个艾泽拉斯的历史进程。'},
+			],
+			owlDataList: [
+				{src: 'images/09d1cd4b6a4f21d1c5af3a5073a71a39.jpg', href: 'video-detail.html?name=reckoning', movieName: '教宗的承继', year: '2019', start: 4, mark: '经典'},
+				{src: 'images/2d556be79f262eee81bfec8f21f494d7.jpg', href: 'video-detail.html?name=reckoning', movieName: '丧尸乐园2', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/b1491a4ee389b4dc6cb75d4661a776d6.jpg', href: 'video-detail.html?name=reckoning', movieName: '告密者', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/496afb975d07d2060fd8f73fb4e3034b.jpg', href: 'video-detail.html?name=reckoning', movieName: '诺艾尔', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/129e4b4b0e94bf142354b0233572b254.jpg', href: 'video-detail.html?name=reckoning', movieName: '热气球飞行家', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/f4bcc1c0899a5f83a1c60621c5f6fdf4.jpg', href: 'video-detail.html?name=reckoning', movieName: '古田军号', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/50d99d55d39e1e523aca879ab1d4d46f.jpg', href: 'video-detail.html?name=reckoning', movieName: '最后一个男孩 ', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/653995627d7f7192f34df5a1a83d427c.jpg', href: 'video-detail.html?name=reckoning', movieName: '潜行者', year: '2019', start: 1, mark: '经典'},
+			],
+			classMoviesList: [],
+			mostDataList: [
+				{
+					href: 'video-detail.html?name=reckoning',
+					src: 'images/09d1cd4b6a4f21d1c5af3a5073a71a39.jpg',
+					moviesName: '教宗的承继',
+					moviesSrc: 'https://blz-videos.nosdn.127.net/1/World%20of%20Warcraft/Saurfangs_Decision_zhCN.mp4',
+					storyLine: '这是一个真实的故事，讲述了近 2000 年来最戏剧性的权力交接事件之一。主教贝尔格利奥（乔纳森·普雷斯饰演）对教会的发展方向感到十分失望，因此向教皇本笃（安东尼·霍普金斯饰演）申请在 2012 年退休。然而，面对丑闻和自我怀疑，善于内省的教皇本笃召见对他最严厉的批判者和未来的继任者来到罗马，在梵蒂冈的围墙之内，展开了一场传统与进步、罪恶与宽恕之间的斗争，这两位截然不同的人直面各自的过去，以图寻找共同点，以及为全世界十亿信徒开创未来。',
+					dateOfRelease: '2019',
+					genres:['剧情', '戏剧', '动作'],
+					star: 4,
+					year: '2019',
+					list: [
+						{src: 'images/09d1cd4b6a4f21d1c5af3a5073a71a39.jpg', href: 'video-detail.html?name=reckoning', movieName: '教宗的承继', year: '2019', star: 4, mark: '经典'},
+						{src: 'images/2d556be79f262eee81bfec8f21f494d7.jpg', href: 'video-detail.html?name=reckoning', movieName: '丧尸乐园2', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/b1491a4ee389b4dc6cb75d4661a776d6.jpg', href: 'video-detail.html?name=reckoning', movieName: '告密者', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/129e4b4b0e94bf142354b0233572b254.jpg', href: 'video-detail.html?name=reckoning', movieName: '热气球飞行家', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/496afb975d07d2060fd8f73fb4e3034b.jpg', href: 'video-detail.html?name=reckoning', movieName: '诺艾尔', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/496afb975d07d2060fd8f73fb4e3034b.jpg', href: 'video-detail.html?name=reckoning', movieName: '诺艾尔', year: '2019', star: 1, mark: '经典'},
+					]
+				},
+				{
+					href: 'video-detail.html?name=reckoning',
+					src: 'images/09d1cd4b6a4f21d1c5af3a5073a71a39.jpg',
+					moviesName: '教宗的承继',
+					moviesSrc: 'https://blz-videos.nosdn.127.net/1/World%20of%20Warcraft/Saurfangs_Decision_zhCN.mp4',
+					storyLine: '这是一个真实的故事，讲述了近 2000 年来最戏剧性的权力交接事件之一。主教贝尔格利奥（乔纳森·普雷斯饰演）对教会的发展方向感到十分失望，因此向教皇本笃（安东尼·霍普金斯饰演）申请在 2012 年退休。然而，面对丑闻和自我怀疑，善于内省的教皇本笃召见对他最严厉的批判者和未来的继任者来到罗马，在梵蒂冈的围墙之内，展开了一场传统与进步、罪恶与宽恕之间的斗争，这两位截然不同的人直面各自的过去，以图寻找共同点，以及为全世界十亿信徒开创未来。',
+					dateOfRelease: '2019',
+					genres:['剧情', '戏剧', '动作'],
+					star: 4,
+					year: '2019',
+					list: [
+						{src: 'images/129e4b4b0e94bf142354b0233572b254.jpg', href: 'video-detail.html?name=reckoning', movieName: '热气球飞行家', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/496afb975d07d2060fd8f73fb4e3034b.jpg', href: 'video-detail.html?name=reckoning', movieName: '诺艾尔', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/f4bcc1c0899a5f83a1c60621c5f6fdf4.jpg', href: 'video-detail.html?name=reckoning', movieName: '古田军号', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/50d99d55d39e1e523aca879ab1d4d46f.jpg', href: 'video-detail.html?name=reckoning', movieName: '最后一个男孩 ', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/653995627d7f7192f34df5a1a83d427c.jpg', href: 'video-detail.html?name=reckoning', movieName: '潜行者', year: '2019', star: 1, mark: '经典'},
+						{src: 'images/653995627d7f7192f34df5a1a83d427c.jpg', href: 'video-detail.html?name=reckoning', movieName: '潜行者', year: '2019', star: 1, mark: '经典'},
+					]
+				},
+			]
+		},
+		created() {
+			$.post("http://192.168.31.49/video/enum/manage/listMovieClasses", null, function (data) {
+				app1.$data.titleList = data;
+			}, "JSON")
+			$.post("http://192.168.31.49/video/tvDetail/manage/listHotTypeTvDetails", null, function (data) {
+				app1.$data.classMoviesList = data;
+			}, "JSON")
+
+		},
+	});
+</script>
+
+<script>
+$(function(){
+	$(".slidey-overlay-title").click(function(){
+		let name = $(".slidey-overlay-title input").val();
+		window.location.href = "video-detail.html?name=" + name;
+	})
+})
+
+
+</script>
+
+
+<script type="text/javascript">
+	$("#slidey").slidey({
+		interval: 8000,
+		listCount: 5,
+		autoplay: false,
+		showList: true
+	});
+	$(".slidey-list-description").dotdotdot();
+	$(window).load(function(){
+		$('.flexslider').flexslider({
+			animation: "slide",
+			start: function(slider){
+				$('body').removeClass('loading');
+			}
+		});
+	});
+	$(document).ready(function() {
+		$('.w3_play_icon,.w3_play_icon1,.w3_play_icon2').magnificPopup({
+			type: 'inline',
+			fixedContentPos: false,
+			fixedBgPos: true,
+			overflowY: 'auto',
+			closeBtnInside: true,
+			preloader: false,
+			midClick: true,
+			removalDelay: 300,
+			mainClass: 'my-mfp-zoom-in'
+		});
+
+	});
+	$(document).ready(function(){
+		$(".dropdown").hover(
+				function() {
+					$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+					$(this).toggleClass('open');
+				},
+				function() {
+					$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+					$(this).toggleClass('open');
+				}
+		);
+	});
+	$(document).ready(function() {
+		$().UItoTop({ easingType: 'easeOutQuart' });
+	});
+	$('.toggle').click(function(){
+		// Switches the Icon
+		$(this).children('i').toggleClass('fa-pencil');
+		// Switches the forms
+		$('.form').animate({
+			height: "toggle",
+			'padding-top': 'toggle',
+			'padding-bottom': 'toggle',
+			opacity: "toggle"
+		}, "slow");
+	});
+	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+	function hideURLbar(){
+		window.scrollTo(0,1);
+	}
+	$(document).ready(function() {
+		$("#owl-demo").owlCarousel({
+
+			autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+			items : 5,
+			itemsDesktop : [640,4],
+			itemsDesktopSmall : [414,3]
+
+		});
+
+	});
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+</html>

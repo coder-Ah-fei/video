@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/medile.css" rel='stylesheet' type='text/css' />
+	<link href="css/single.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/contactstyle.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/faqstyle.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="news-css/news.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="list-css/list.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+	<link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+	<div id="app">
+		<template>
+			<div class="header">
+				<div class="container">
+					<div class="w3layouts_logo">
+						<a href="index.html"><h1>一心一忆<span>Movies</span></h1></a>
+					</div>
+					<div class="w3_search">
+						<form action="#" method="post">
+							<input type="text" name="Search" placeholder="搜索" required="">
+							<input type="submit" value="Go">
+						</form>
+					</div>
+					<div class="w3l_sign_in_register">
+						<ul>
+							<li><i class="fa fa-phone" aria-hidden="true"></i>010-69515720</li>
+						</ul>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							Sign In & Sign Up
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						</div>
+						<section>
+							<div class="modal-body">
+								<div class="w3_login_module">
+									<div class="module form-module">
+										<div class="toggle"><i class="fa fa-times fa-pencil"></i>
+											<div class="tooltip">Click Me</div>
+										</div>
+										<div class="form">
+											<h3>Login to your account</h3>
+											<form action="#" method="post">
+												<input type="text" name="Username" placeholder="Username" required="">
+												<input type="password" name="Password" placeholder="Password" required="">
+												<input type="submit" value="Login">
+											</form>
+										</div>
+										<div class="form">
+											<h3>Create an account</h3>
+											<form action="#" method="post">
+												<input type="text" name="Username" placeholder="Username" required="">
+												<input type="password" name="Password" placeholder="Password" required="">
+												<input type="email" name="Email" placeholder="Email Address" required="">
+												<input type="text" name="Phone" placeholder="Phone Number" required="">
+												<input type="submit" value="Register">
+											</form>
+										</div>
+										<div class="cta"><a href="#">Forgot your password?</a></div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+			<div class="movies_nav">
+				<div class="container">
+					<nav class="navbar navbar-default">
+						<div class="navbar-header navbar-left">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+							<nav>
+								<ul class="nav navbar-nav">
+									<li v-for="(title, i) in titleList" :class="i == 0 ? 'active': ''"><a :href="title.href">{{title.text}}</a></li>
+								</ul>
+							</nav>
+						</div>
+					</nav>
+				</div>
+			</div>
+			<div class="single-page-agile-main">
+				<div class="container">
+					<div class="agileits-single-top">
+						<ol class="breadcrumb">
+							<li><a href="index.html">首页</a></li>
+							<li class="active">详情</li>
+						</ol>
+					</div>
+					<div class="single-page-agile-info">
+						<div class="show-top-grids-w3lagile">
+							<div class="col-sm-8 single-left">
+								<table width="100%">
+									<tr>
+										<td rowspan="2" width="30%;">
+											<a class="toPlayPage">
+												<div :style="'width: 90%; background: url(' + moviesData.cover + ') round; height: 35vh; text-align: center;'">
+													<span style="font-size: 60px; margin-top: 15vh; color: white;" aria-hidden="true" class="glyphicon glyphicon-play-circle"></span>
+												</div>
+											</a>
+										</td>
+										<td>
+											<div v-html="moviesData.moviesMessage"></div>
+											<div>
+												<button class="toPlayPage" style="font-size: 14px; font-weight: 700; background-color: #FF8D1B; border: 1px solid #FF9900; color: #FFFFFF; padding: 10px 35px; margin: 10px;">立即播放</button>
+											</div>
+										</td>
+									</tr>
+								</table>
+								<div style="margin-top: 10%;">
+									<div style="margin-bottom: 5%;">
+										<p>资源</p>
+										<hr style="margin-top: 0;">
+										<div>
+											<button class="toPlayPage" style="width: 10%;">HD</button>
+											<button class="toPlayPage" style="width: 10%;">DVD</button>
+										</div>
+									</div>
+									<div style="margin-bottom: 5%;">
+										<p>演员表</p>
+										<hr style="margin-top: 0;">
+										<div>
+											<table>
+												<tr>
+													<td v-for="actor in moviesData.actorList" :style="'text-align: center; width: ' + (100/moviesData.actorList.length) + '%;'">
+														<img style="max-width: 90%;" :src="actor.src">
+														<p>{{actor.name}}</p>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<p>剧情简介</p>
+									<hr>
+									<div>
+										<p>
+											{{moviesData.moviesDetail}}
+										</p>
+									</div>
+								</div>
+
+
+								<!--<div class="song">
+									<div class="song-info">
+										<h3>{{moviesData.moviesName}}</h3>
+									</div>
+									<div class="video-grid-single-page-agileits">
+										<video :poster="moviesData.poster" controls style="max-width: 700px;" :src="moviesData.moviesSrc" />
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+								<div class="all-comments">
+									<div class="all-comments-info">
+										<a href="#">简介</a>
+										<div class="agile-info-wthree-box">
+											　{{moviesData.moviesDetail}}　
+										</div>
+									</div>
+									<div class="media-grids">
+										<div v-for="comment in moviesData.commentList" class="media">
+											<h5>{{comment.name}}</h5>
+											<div class="media-left">
+												<a href="#">
+													<img :src="comment.avatarPic" title="One movies" alt=" " />
+												</a>
+											</div>
+											<div class="media-body">
+												<p>{{comment.comment}}</p>
+											</div>
+										</div>
+									</div>
+								</div>-->
+							</div>
+							<div class="col-md-4 single-right">
+								<h3>猜你喜欢</h3>
+								<div class="single-grid-right">
+									<div v-for="data in youLikeData" class="single-right-grids">
+										<div class="col-md-4 single-right-grid-left">
+											<a :href="data.href"><img :src="data.imgSrc" alt="" /></a>
+										</div>
+										<div class="col-md-8 single-right-grid-right">
+											<a :href="data.href" class="title">{{data.moviesName}}</a>
+											<p class="author"><a href="#" class="author">{{data.author}}</a></p>
+											<p class="views">{{data.viewsNum}}次</p>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<div class="w3_agile_banner_bottom_grid">
+							<div id="owl-demo" class="owl-carousel owl-theme">
+								<div v-for="owl in owlDataList" class="item">
+									<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+										<a href="single.html" class="hvr-shutter-out-horizontal"><img style="height: 38vh;" :src="owl.src" title="album-name" class="img-responsive" alt=" " />
+											<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+										</a>
+										<div class="mid-1 agileits_w3layouts_mid_1_home">
+											<div class="w3l-movie-text">
+												<h6><a :href="owl.href">{{owl.movieName}}</a></h6>
+											</div>
+											<div class="mid-2 agile_mid_2_home">
+												<p>{{owl.year}}</p>
+												<div class="block-stars">
+													<ul class="w3l-ratings">
+														<li v-for="i in 5"><a href="#"><i :class="owl.start == i ? 'fa fa-star' : 'fa fa-star-o'" aria-hidden="true"></i></a></li>
+													</ul>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+										<div class="ribben">
+											<p>{{owl.mark}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="container">
+					<div class="w3ls_footer_grid">
+						<div class="col-md-6 w3ls_footer_grid_left">
+							<div class="w3ls_footer_grid_left1">
+								<h2>Subscribe to us</h2>
+								<div class="w3ls_footer_grid_left1_pos">
+									<form action="#" method="post">
+										<input type="email" name="email" placeholder="Your email..." required="">
+										<input type="submit" value="Send">
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 w3ls_footer_grid_right">
+							<a href="index.html"><h2>One<span>Movies</span></h2></a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="col-md-5 w3ls_footer_grid1_left">
+						<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					</div>
+					<div class="col-md-7 w3ls_footer_grid1_right">
+						<ul>
+							<li>
+								<a href="genres.html">Movies</a>
+							</li>
+							<li>
+								<a href="faq.html">FAQ</a>
+							</li>
+							<li>
+								<a href="horror.html">Action</a>
+							</li>
+							<li>
+								<a href="genres.html">Adventure</a>
+							</li>
+							<li>
+								<a href="comedy.html">Comedy</a>
+							</li>
+							<li>
+								<a href="icons.html">Icons</a>
+							</li>
+							<li>
+								<a href="contact.html">Contact Us</a>
+							</li>
+						</ul>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</template>
+	</div>
+</body>
+
+
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script src="https://cn.vuejs.org/js/vue.js"></script>
+<script src="js/owl.carousel.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/simplePlayer.js"></script>
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="js/video-data.js"></script>
+
+
+<script>
+
+
+	var app = new Vue({
+		el: "#app",
+		data: {
+			titleList: [
+				{href: 'index.html', text: '首页'},
+				{href: 'genres.html', text: '电影'},
+				{href: 'series.html', text: '连续剧'},
+				{href: 'news.html', text: '综艺'},
+				{href: 'news.html', text: '动漫'},
+				{href: 'short-codes.html', text: '专题'},
+				// {href: 'list.html', text: '排行榜'},
+			],
+			moviesData: {},
+			youLikeData: [
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+				{
+					href: 'index.html',
+					moviesName: '古田军号',
+					imgSrc: 'images/m5.jpg',
+					author: '袁和平',
+					viewsNum: '123,12',
+				},
+			],
+			owlDataList: [
+				{src: 'images/09d1cd4b6a4f21d1c5af3a5073a71a39.jpg', href: 'single.html', movieName: '教宗的承继', year: '2019', start: 4, mark: '经典'},
+				{src: 'images/2d556be79f262eee81bfec8f21f494d7.jpg', href: 'single.html', movieName: '丧尸乐园2', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/b1491a4ee389b4dc6cb75d4661a776d6.jpg', href: 'single.html', movieName: '告密者', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/496afb975d07d2060fd8f73fb4e3034b.jpg', href: 'single.html', movieName: '诺艾尔', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/129e4b4b0e94bf142354b0233572b254.jpg', href: 'single.html', movieName: '热气球飞行家', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/f4bcc1c0899a5f83a1c60621c5f6fdf4.jpg', href: 'single.html', movieName: '古田军号', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/50d99d55d39e1e523aca879ab1d4d46f.jpg', href: 'single.html', movieName: '最后一个男孩 ', year: '2019', start: 1, mark: '经典'},
+				{src: 'images/653995627d7f7192f34df5a1a83d427c.jpg', href: 'single.html', movieName: '潜行者', year: '2019', start: 1, mark: '经典'},
+			],
+
+		},
+		created: function(){
+			var videoData = getVideoData();
+			let name = this.getQueryString("name");
+
+			for(var i = 0; i < videoData.length; i++){
+				if(videoData[i].moviesId == name){
+					this.moviesData = videoData[i];
+					break;
+				}
+			}
+		},
+		methods: {
+			getQueryString: function(name) {                                       //name为传入参数
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null) return unescape(r[2]); return null;
+			}
+		}
+	})
+</script>
+<script type="application/x-javascript">
+	$(".toPlayPage").click(function () {
+
+		window.location.href = "single.html?name=" + app.$data.moviesData.moviesId;
+	})
+
+
+	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+	function hideURLbar(){
+		window.scrollTo(0,1);
+	}
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+	$('.toggle').click(function(){
+		$(this).children('i').toggleClass('fa-pencil');
+		$('.form').animate({
+			height: "toggle",
+			'padding-top': 'toggle',
+			'padding-bottom': 'toggle',
+			opacity: "toggle"
+		}, "slow");
+	});
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.7";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	(function() {
+		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		po.src = 'https://apis.google.com/js/platform.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	})();
+	$(document).ready(function() {
+		$("#owl-demo").owlCarousel({
+
+			autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+			items : 5,
+			itemsDesktop : [640,5],
+			itemsDesktopSmall : [414,4]
+
+		});
+
+	});
+	$("document").ready(function() {
+		$("#video").simplePlayer();
+	});
+	$(document).ready(function(){
+		$(".dropdown").hover(
+				function() {
+					$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+					$(this).toggleClass('open');
+				},
+				function() {
+					$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+					$(this).toggleClass('open');
+				}
+		);
+	});
+	$(document).ready(function() {
+		$().UItoTop({ easingType: 'easeOutQuart' });
+	});
+</script>
+
+</html>
